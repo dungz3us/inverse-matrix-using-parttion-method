@@ -1,12 +1,14 @@
 #include <stdio.h>
-
+#include <math.h>
 // find determinant of a matrix
 // using Gaussian elimination
-double det( float matrix[10][10], int n )
+
+float det (float matrix[10][10], int n)
 {
-    int i, j, k;
-    float ratio, det = 1, b[10][10];
-    //copy Matrix
+    float b[10][10];
+    int i, j, t, count;
+    float temp;
+    float det = 1;
     for (i = 0; i < n; i++)
     {
         for (j = 0; j < n ; j++)
@@ -14,25 +16,37 @@ double det( float matrix[10][10], int n )
             b[i][j] = matrix[i][j];
         }
     }
-    for( i = 0; i < n; i++)
+    i = 0;
+    j = 0;
+    while (i < n && j < n)
     {
-        if( b[i][i] == 0.0 )
+        if (b[i][j] == 0)
         {
-            printf("Mathematical Error! - det \n");
-            break;
-        }
-        for( j = i + 1; j < n; j++)
-        {
-            ratio = b[j][i] / b[i][i];
-            for( k = 0; k < n; k++) {
-                b[j][k] = b[j][k] - ratio * b[i][k];
+            t = i + 1;
+            while (t < n)
+            {
+                if (b[t][j] != 0)
+                {
+                    count++;
+                    for (int k = 0; k < n; k++) {
+                        temp = b[t][k];
+                        b[t][k] = b[i][k];
+                        b[i][k] = temp;
+                    }
+                    t++;
+                }
             }
         }
+        for (int k = i + 1; k < n; k++)
+        {
+            float c = b[k][j]/b[i][j];
+            for (int y = j; y < n; y++)
+                b[k][y] = b[k][y] - b[i][y] * c;
+        }
+        i++; j++;
     }
-    for(i = 0; i < n; i++)
-    {
-        det = det * b[i][i];
-    }
+    for (i = 0; i < n; i++)
+        det = det * b[i][i] * pow(-1, count);
     return det;
 }
 

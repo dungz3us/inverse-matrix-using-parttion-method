@@ -1,4 +1,4 @@
-"C:\Program Files\JetBrains\CLion 2022.1.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.1.3/bin/ninja/win/ninja.exe" -G Ninja -S C:\Users\admin\CLionProjects\untitled3 -B C:\Users\admin\CLionProjects\untitled3\cmake-build-debug
+"C:\Program Files\JetBrains\CLion 2022.1.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2022.1.3/bin/ninja/win/ninja.exe" -G Ninja -S "C:\Users\admin\CLionProjects\inverse matrix using parttion method" -B "C:\Users\admin\CLionProjects\inverse matrix using parttion method\cmake-build-debug"
 -- The C compiler identification is GNU 11.2.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
@@ -7,4 +7,4 @@
 -- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: C:/Users/admin/CLionProjects/untitled3/cmake-build-debug
+-- Build files have been written to: C:/Users/admin/CLionProjects/inverse matrix using parttion method/cmake-build-debug
