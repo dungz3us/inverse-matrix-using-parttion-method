@@ -46,6 +46,14 @@ float det (float matrix[10][10], int n)
         j++;
     }
     for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n ; j++)
+        {
+            printf("%f\t", b[i][j]);
+        }
+        printf("\n");
+    }
+    for (i = 0; i < n; i++)
         det = det * b[i][i];
     det = det * pow(-1, count);
     if(det == 0) printf("Mathematical Error! - det\n");
@@ -187,33 +195,15 @@ int main()
 //    input matrix
     printf("Enter order of matrix: ");
     scanf("%d", &n);
-//    printf("\nEnter Coefficients of Matrix: \n");
-//    for (int i = 0; i < n; i++)
-//    {
-//        for (int j = 0; j < n ; j++)
-//        {
-//            scanf("%f", &matrix[i][j]);
-//        }
-//    }
+    printf("\nEnter Coefficients of Matrix: \n");
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n ; j++)
+        {
+            scanf("%f", &matrix[i][j]);
+        }
+    }
 //       Check if there is inverse matrix
-    FILE *fp;
-    fp = fopen("C:\\Users\\admin\\CLionProjects\\inverse matrix using parttion method\\matrix.txt", "r");
-
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            fscanf(fp, "%f\n", &matrix[i][j]);
-        }
-    }
-
-    printf("\nMa tran: \n");
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            printf("%lf\t ", matrix[i][j]);
-        }
-        printf("\n");
-    }
-    fclose(fp);
-
     d = det(matrix, n);
     if (d == 0)
     {
@@ -224,7 +214,6 @@ int main()
     {
 //        transpose matrix
         transpose(matrix, transpose_matrix, n);
-//        symmetric matrix
         multiply(transpose_matrix, matrix, symmetric_matrix, n, n ,n ,n);
 //        partitioning method
         inverse(symmetric_matrix, inv_symmetric_matrix, n);
