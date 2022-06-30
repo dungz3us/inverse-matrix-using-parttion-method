@@ -2,13 +2,11 @@
 #include <math.h>
 // find determinant of a matrix
 // using Gaussian elimination
-
 float det (float matrix[10][10], int n)
 {
     float b[10][10];
-    int i, j, t, count;
-    float temp;
-    float det = 1;
+    int i, j, t, count = 0;
+    float temp, det = 1;
     for (i = 0; i < n; i++)
     {
         for (j = 0; j < n ; j++)
@@ -28,28 +26,49 @@ float det (float matrix[10][10], int n)
                 if (b[t][j] != 0)
                 {
                     count++;
-                    for (int k = 0; k < n; k++) {
+                    for (int k = 0; k < n; k++)
+                    {
                         temp = b[t][k];
                         b[t][k] = b[i][k];
                         b[i][k] = temp;
                     }
-                    t++;
                 }
+                t++;
             }
         }
         for (int k = i + 1; k < n; k++)
         {
-            float c = b[k][j]/b[i][j];
+            float c = b[k][j] / b[i][j];
             for (int y = j; y < n; y++)
                 b[k][y] = b[k][y] - b[i][y] * c;
         }
-        i++; j++;
+        i++;
+        j++;
     }
     for (i = 0; i < n; i++)
-        det = det * b[i][i] * pow(-1, count);
+    {
+        for (j = 0; j < n ; j++)
+        {
+            printf("%f\t", b[i][j]);
+        }
+        printf("\n");
+    }
+    for (i = 0; i < n; i++)
+        det = det * b[i][i];
+    det = det * pow(-1, count);
+    if(det == 0) printf("Mathematical Error! - det\n");
     return det;
 }
-
+//transpose matrix
+void transpose(float input[10][10],float result[10][10], int n)
+{
+    for(int i = 0; i < n; i++)
+        {
+        for(int j = 0; j < n; j++){
+            result[j][i] = input[i][j];
+        }
+        }
+}
 // identity matrix
 void identity( float matrix[10][10], int n )
 {
@@ -131,7 +150,7 @@ void inverse(float input[10][10], float result[10][10], int n) {
         multiply(result1, matrix2, result2, 1, n - 1, n - 1, 1);
 //        find theta
         theta = matrix4 - result2[0][0];
-        if (theta == 0.0)
+        if (theta == 0)
         {
             printf("Mathematical Error! - theta\n");
             return;
@@ -172,7 +191,7 @@ void inverse(float input[10][10], float result[10][10], int n) {
 int main()
 {
     int n;
-    float matrix[10][10], invMatrix[10][10];
+    float matrix[10][10], transpose_matrix[10][10], symmetric_matrix[10][10], inv_symmetric_matrix[10][10], invMatrix[10][10], d;
 //    input matrix
     printf("Enter order of matrix: ");
     scanf("%d", &n);
@@ -184,8 +203,8 @@ int main()
             scanf("%f", &matrix[i][j]);
         }
     }
-    float d = det(matrix, n);
 //       Check if there is inverse matrix
+    d = det(matrix, n);
     printf("\nDeterminant of Matrix: %f\n", d);
     if (d == 0)
     {
@@ -194,10 +213,14 @@ int main()
     }
     else
     {
+//        transpose matrix
+        transpose(matrix, transpose_matrix, n);
+        multiply(transpose_matrix, matrix, symmetric_matrix, n, n ,n ,n);
 //        partitioning method
-        inverse(matrix, invMatrix, n);
+        inverse(symmetric_matrix, inv_symmetric_matrix, n);
+        multiply(inv_symmetric_matrix, transpose_matrix, invMatrix, n, n, n, n);
     }
-//        print inverse matrix
+    //        print inverse matrix
     printf("Inverse matrix:\n");
     for (int i = 0; i < n; i++)
     {
