@@ -205,7 +205,6 @@ int main()
     }
 //       Check if there is inverse matrix
     d = det(matrix, n);
-    printf("\nDeterminant of Matrix: %f\n", d);
     if (d == 0)
     {
         printf("There is no inverse matrix\n");
