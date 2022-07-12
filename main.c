@@ -229,7 +229,7 @@ int main()
         inverse(symmetric_matrix, inv_symmetric_matrix, n);
         multiply(inv_symmetric_matrix, transpose_matrix, invMatrix, n, n, n, n);
     }
-    //        print inverse matrix
+//        print inverse matrix
     printf("Inverse matrix:\n");
     for (int i = 0; i < n; i++)
     {
